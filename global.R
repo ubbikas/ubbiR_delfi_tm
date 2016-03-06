@@ -26,6 +26,13 @@ suppressPackageStartupMessages(require(RWeka))
 suppressPackageStartupMessages(require(wordcloud))
 suppressPackageStartupMessages(require(beepr))
 
+# set system locale to Lithuanian
+Sys.setlocale(, 'Lithuanian')
 
-# setting work directory
-setwd(file.path(getwd(), "GitHub", "ubbiR_delfi_tm"))
+# load all data
+source("loadData.R")
+
+# loading all custom functions
+for (file in list.files("functions")) {
+  source(file.path("functions", file))
+}

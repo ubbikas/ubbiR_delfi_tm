@@ -44,7 +44,7 @@ HistoryPages <- rv %>%
                 as.integer
 
 
-# scrape delfi archive for article headers and store them to DB
+# scrape delfi archive for article titles and store them to DB
 for (i in 1:HistoryPages) {
   url <- paste0("http://www.delfi.lt/archive/index.php?fromd=01.01.1999&tod=01.01.2020&channel=0&category=0&query=&page=", i)
   rv <- read_html(url, encoding="utf-8")

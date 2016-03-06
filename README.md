@@ -1,8 +1,8 @@
 # ubbiR_delfi_tm
 
-Text mining delfi.lt article headers from period 2000-2015:
+Text mining delfi.lt article titles from period 2000-2015:
 - create postgresql db table
-- collect all article headers and store into db
+- collect all article titles and store into db
 - create Term Document Matrix (TDM) by year
 - analyze and compare frequency of chosen words summarising different periods
 - find articles and most found words in them associated with your searchword 
