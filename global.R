@@ -1,8 +1,9 @@
-#libraries  i use
+# libraries  i use
 suppressPackageStartupMessages(require(dplyr))
 suppressPackageStartupMessages(require(tidyr))
 suppressPackageStartupMessages(require(XLConnect))
 suppressPackageStartupMessages(require(shiny))
+suppressPackageStartupMessages(require(shinyjs))
 suppressPackageStartupMessages(require(sqldf))
 suppressPackageStartupMessages(require(shinyBS))
 suppressPackageStartupMessages(require(devtools))
@@ -26,13 +27,17 @@ suppressPackageStartupMessages(require(RWeka))
 suppressPackageStartupMessages(require(wordcloud))
 suppressPackageStartupMessages(require(beepr))
 
+# set working directory
+tryCatch(setwd(file.path(getwd(), "GitHub", "ubbiR_delfi_tm")), 
+         error = function(e) print("Working directory already set"))
+
 # set system locale to Lithuanian
 Sys.setlocale(, 'Lithuanian')
 
 # load all data
-source("loadData.R")
+source("loadData.R", local = TRUE)
 
 # loading all custom functions
 for (file in list.files("functions")) {
-  source(file.path("functions", file))
+  source(file.path("functions", file), local = TRUE)
 }

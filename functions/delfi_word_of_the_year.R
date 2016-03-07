@@ -19,7 +19,8 @@ delfi_word_of_the_year <- function(year, maxSum = 10000, maxWords = 100) {
   print(data)
   
   wordcloud(words = data$zodis,
-            freq = data$diffe, 
+            freq = data$diffe,
+            scale = c(4, 0.2),
             min.freq = 0,
             max.words = maxWords,
             random.order = FALSE, 

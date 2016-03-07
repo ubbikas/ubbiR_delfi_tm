@@ -45,7 +45,8 @@ delfi_word_change <- function(year, type = "disappeared", maxWords = 100) {
   print(data[, c("zodis", "allSums")])
   
   wordcloud(words = data$zodis, 
-            freq = data$allSums, 
+            freq = data$allSums,
+            scale = c(4, 0.2),
             min.freq = 0,
             max.words = maxWords,
             random.order = FALSE, 

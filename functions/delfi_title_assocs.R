@@ -34,7 +34,8 @@ delfi_title_assocs <- function(seachWords, maxWords = 100) {
   print(data)
   
   wordcloud(words = data$word, 
-            freq = data$freq, 
+            freq = data$freq,
+            scale = c(4, 0.2),
             min.freq = 0,
             max.words = 100, 
             random.order = FALSE, 
