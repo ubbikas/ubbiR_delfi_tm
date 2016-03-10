@@ -2,7 +2,7 @@
 # - x - a vector of searchWords; if you want to include multiple words into 
 #       one searchWord, separate them by '|' without whitespaces, 
 #       e.g., "Vilnius|Kaunas"
-delfi_words_freq <- function(searchWords, width = 600, height = 400) {
+delfi_words_freq <- function(searchWords, width = 600, height = 400, span = 0.1) {
   searchWords %>%
   lapply(function(x){
           delfidb[grepl(x, delfidb$pavadinimas, ignore.case = TRUE),] %>%
@@ -15,9 +15,12 @@ delfi_words_freq <- function(searchWords, width = 600, height = 400) {
   dataTable %>%
   ggvis(~Date, ~Articles) %>%
   group_by(ID) %>%
-  #layer_lines(stroke = ~ID, strokeWidth := 2) %>%
+  layer_lines(stroke = ~ID, 
+              strokeWidth := 2,
+              opacity := 0.4) %>%
   scale_datetime("x") %>%
-  layer_smooths(stroke = ~ID, span = 0.1) %>%
+  layer_smooths(stroke = ~ID, 
+                span = span) %>%
   set_options(width = width, 
               height = height, 
               keep_aspect = TRUE,

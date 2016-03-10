@@ -7,9 +7,6 @@ output$TAB1 <- renderUI({
       ),
       column(7, class = "box",
         uiOutput("WordFrequencyPlotUI")
-      ),
-      column(2, class = "box",
-        uiOutput("WordFrequencyTableUI")
       )
     )
   )
