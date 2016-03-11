@@ -1,7 +1,7 @@
 loaded_objects <- ls()
 
 print("Loading data..")
-loadingProgress <- txtProgressBar(min = 0, max = 7, style = 3)
+loadingProgress <- txtProgressBar(min = 0, max = 8, style = 3)
 
 # load all DB data from csv file and create variables of 
 # different time periods
@@ -61,5 +61,15 @@ if (!"delfiTdmDataFrameBinary" %in% loaded_objects) {
   delfiTdmDataFrameBinary$zodis <- delfiTdmDataFrame$zodis
 }
 setTxtProgressBar(loadingProgress, 7)
+
+# make binary data frame - if words exist that year - it's given a 1, else - 0;
+# place words back to TDM data frame
+if (!"delfiYears" %in% loaded_objects) {
+  coln <- colnames(delfiTdmDataFrameBinary)
+  delfiYears <- coln[grepl("X", coln)] %>%
+                gsub("X", "", .) %>%
+                as.numeric()
+}
+setTxtProgressBar(loadingProgress, 8)
 
 close(loadingProgress)

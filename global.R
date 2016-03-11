@@ -27,7 +27,7 @@ suppressPackageStartupMessages(require(RWeka))
 suppressPackageStartupMessages(require(wordcloud))
 suppressPackageStartupMessages(require(beepr))
 suppressPackageStartupMessages(require(shinythemes))
-
+suppressPackageStartupMessages(require(extrafont))
 
 # set working directory
 tryCatch(setwd(file.path(getwd(), "GitHub", "ubbiR_delfi_tm")), 

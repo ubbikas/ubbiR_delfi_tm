@@ -60,3 +60,9 @@ body {
   padding-bottom: 0px;
   margin: 0px;
 }
+
+.list-group-item {
+  font-size: 12px;
+  padding: 5px;
+  margin: 0px;
+}

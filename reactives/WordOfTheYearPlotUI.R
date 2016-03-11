@@ -1,9 +1,9 @@
-output$WordFrequencyPlotUI <- renderUI({
+output$WordOfTheYearPlotUI <- renderUI({
   isolate({
     tagList(
       p("Visual", 
         class = "boxHeader"),
-      ggvisOutput("WordFrequencyPlotggvis")
+      plotOutput("WordOfTheYearPlot")
     )
   })
 })
