@@ -17,29 +17,44 @@ delfi_word_change <- function(year, type = "disappeared", maxWords = 100) {
     if (Xyear %in% colnames(delfiTdmDataFrameBinary)[1]) {
       return(print("Please choose one of the later years"))
     }
-    if (Xyear %in% tail(colnames(delfiTdmDataFrameBinary), 2)) {
-      return(print("Please choose one of the earlier years"))
-    }
   }
 
   yearNumber <- which(colnames(delfiTdmDataFrameBinary) == Xyear)
+  
+  delfiYears <- coln[grepl("X", colnames(delfiTdmDataFrameBinary))] %>%
+                gsub("X", "", .) %>%
+                as.numeric()
+  delfiYearsN <- length(delfiYears)              
+
 
   if(type == "disappeared") {
+    if (yearNumber == length(delfiYears)) {
+      delfiTdmDataFrameBinary %>%
+        mutate(allSums = rowSums(delfiTdmDataFrame[ , 1:delfiYearsN]),
+               sums1 = rowSums(.[ ,1:delfiYearsN]),
+               sums2 = rowSums(.[ ,1:(yearNumber - 1)])) %>%
+        filter(sums1 == sums2) %>%
+        arrange(desc(allSums)) %>%
+        head(maxWords) -> data
+    } else {
+      delfiTdmDataFrameBinary %>%
+        mutate(allSums = rowSums(delfiTdmDataFrame[ , 1:delfiYearsN]),
+               sums1 = rowSums(.[ ,1:delfiYearsN]),
+               sums2 = rowSums(.[ ,yearNumber:delfiYearsN])) %>%
+        filter(sums1 == yearNumber - 1, sums2 == 0) %>%
+        arrange(desc(allSums)) %>%
+        head(maxWords) -> data
+    }
+  }
+
+  if(type == "appeared") {
     delfiTdmDataFrameBinary %>%
-      mutate(allSums = rowSums(delfiTdmDataFrame[ , 1:16]),
-             sums1 = rowSums(.[ ,1:yearNumber]),
-             sums2 = rowSums(.[ ,yearNumber:16])) %>%
-      filter(sums1 == yearNumber - 1, sums2 == 0) %>%
+      mutate(allSums = rowSums(delfiTdmDataFrame[ , 1:delfiYearsN]),
+             sums1 = rowSums(.[ , 1:(yearNumber - 1)]),
+             sums2 = rowSums(.[ , 1:delfiYearsN])) %>%
+      filter(sums1 == 0, sums2 == delfiYearsN - (yearNumber - 1)) %>%
       arrange(desc(allSums)) %>%
-      head(50) -> data    
-  } else {
-    delfiTdmDataFrameBinary %>%
-      mutate(allSums = rowSums(delfiTdmDataFrame[ , 1:16]),
-             sums1 = rowSums(.[ ,1:(yearNumber - 1)]),
-             sums2 = rowSums(.[ ,(yearNumber - 1):16])) %>%
-      filter(sums1 == 0, sums2 == 16 - (yearNumber - 1)) %>%
-      arrange(desc(allSums)) %>%
-      head(maxWords) -> data    
+      head(maxWords) -> data
   }
   
   print(data[, c("zodis", "allSums")])

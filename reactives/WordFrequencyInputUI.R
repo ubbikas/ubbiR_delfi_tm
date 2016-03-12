@@ -7,7 +7,7 @@ output$WordFrequencyInputUI <- renderUI({
        If You want to account for any of multiple inserts to be found, 
        separate them by '|' symbol."),
     textInput("WordFrequencyInput1", 
-              label = ""),
+              label = "Search words:"),
     bsAlert("WordFrequencyInputCount1"),
     textInput("WordFrequencyInput2", 
               label = ""),

@@ -69,6 +69,8 @@ if (!"delfiYears" %in% loaded_objects) {
   delfiYears <- coln[grepl("X", coln)] %>%
                 gsub("X", "", .) %>%
                 as.numeric()
+  delfiYearsAppeared <- delfiYears[-c(1:2)]
+  delfiYearsDisappeared <- delfiYears[-c(1)]
 }
 setTxtProgressBar(loadingProgress, 8)
 
